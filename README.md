@@ -22,10 +22,44 @@ Demo: https://trendmicro-frontend.github.io/react-iframe
 
 ## Usage
 
+### Fixed width and height
+
 ```js
-<Iframe src="./index.html" />
+<Iframe src="index.html" width="100%" height={240} />
 ```
 
+### Resize iframe to fit content (same domain only)
+
+If you want to avoid polling, use [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) and [resize-event](https://github.com/shama/resize-event) to detect the size of the iframe on content changes.
+
+```js
+<Iframe
+    ref={node => {
+        if (this.resizableIframeTimer) {
+            clearInterval(this.resizableIframeTimer);
+            this.resizableIframeTimer = null;
+        }
+        
+        if (!node) {
+            return;
+        }
+        
+        const iframe = ReactDOM.findDOMnode(node);
+        if (iframe && iframe.contentWindow) {
+            let prevHeight = 0;
+            this.resizableIframeTimer = setInterval(() => {
+                const nextHeight = iframe.contentWindow.document.body.offsetHeight;
+                if (prevHeight !== nextHeight) {
+                    iframe.style.height = nextHeight + 'px';
+                    prevHeight = nextHeight;
+                }
+            }, 200);
+        }
+    }}
+    src="index.html"
+    width="100%"
+/>
+```
 
 ## API
 
