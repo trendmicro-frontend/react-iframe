@@ -1,5 +1,6 @@
 {
   "name": "@trendmicro/react-iframe",
+  "version": "0.1.0",
   "description": "React Iframe component",
   "authors": [
     "Cheton Wu <cheton_wu@trend.com.tw>"
