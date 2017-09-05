@@ -34,18 +34,17 @@ If you want to avoid polling, use [MutationObserver](https://developer.mozilla.o
 
 ```js
 <Iframe
-    ref={node => {
+    ref={iframe => {
         if (this.resizableIframeTimer) {
             clearInterval(this.resizableIframeTimer);
             this.resizableIframeTimer = null;
         }
         
-        if (!node) {
+        if (!iframe) {
             return;
         }
         
-        const iframe = ReactDOM.findDOMnode(node);
-        if (iframe && iframe.contentWindow) {
+        if (iframe.contentWindow) {
             let prevHeight = 0;
             this.resizableIframeTimer = setInterval(() => {
                 const nextHeight = iframe.contentWindow.document.body.offsetHeight;
@@ -78,6 +77,13 @@ sandbox.allowPopups | boolean | true | Re-enables popups.
 sandbox.allowSameOrigin | boolean | true | Allows the iframe content to be treated as being from the same origin.
 sandbox.allowScripts | boolean | true | Re-enables scripts.
 sandbox.allowTopNavigation | boolean | false | Allows the iframe content to navigate its top-level browsing context.
+
+### Getters
+
+Name | Description
+:--- | :----------
+iframe | The iframe element.
+contentWindow | The Window object of an iframe element.
 
 ## License
 
