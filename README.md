@@ -23,11 +23,7 @@ Demo: https://trendmicro-frontend.github.io/react-iframe
 ## Usage
 
 ```js
-<Component
-    className="component"
->
-    GitHub
-</Component>
+<Iframe src="./index.html" />
 ```
 
 
@@ -37,6 +33,17 @@ Demo: https://trendmicro-frontend.github.io/react-iframe
 
 Name | Type | Default | Description 
 :--- | :--- | :------ | :----------
+src | string | | The src attribute specifies the address of the document to embed in the iframe.
+width | string or number | '100%' | The width attribute specifies the width of an iframe, in pixels.
+height | string or number | '100%' | The height attribute specifies the height of an iframe, in pixels.
+sandbox | object or string |  | The sandbox attribute enables an extra set of restrictions for the content in the iframe.
+sandbox.allowForms | boolean | true | Re-enables form submission.
+sandbox.allowModals | boolean | true | Sandboxed frames will block modal dialogs by default.
+sandbox.allowPointerLock | boolean | false | Re-enables APIs.
+sandbox.allowPopups | boolean | true | Re-enables popups.
+sandbox.allowSameOrigin | boolean | true | Allows the iframe content to be treated as being from the same origin.
+sandbox.allowScripts | boolean | true | Re-enables scripts.
+sandbox.allowTopNavigation | boolean | false | Allows the iframe content to navigate its top-level browsing context.
 
 ## License
 
