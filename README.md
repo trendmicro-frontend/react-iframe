@@ -30,7 +30,7 @@ Demo: https://trendmicro-frontend.github.io/react-iframe
 
 ### Resize iframe to fit content (same domain only)
 
-If you want to avoid polling, use [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) and [resize-event](https://github.com/shama/resize-event) to detect the size of the iframe on content changes.
+If you want to avoid polling, use [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) or [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) to detect the size of the iframe on content changes.
 
 ```js
 <Iframe
