@@ -17,6 +17,7 @@ const mapSandboxToString = (sandbox = '') => {
 class Iframe extends PureComponent {
     static propTypes = {
         sandbox: PropTypes.oneOfType([
+            PropTypes.bool,
             PropTypes.string,
             PropTypes.shape({
                 // Re-enables form submission
@@ -43,7 +44,6 @@ class Iframe extends PureComponent {
         ])
     };
     static defaultProps = {
-        frameBorder: 0,
         width: '100%',
         height: '100%',
         sandbox: {
@@ -67,14 +67,21 @@ class Iframe extends PureComponent {
         return contentWindow;
     }
     render() {
-        const props = { ...this.props };
-        const sandbox = mapSandboxToString(props.sandbox);
-        delete props.sandbox;
+        const { style, ...props } = this.props;
+
+        if (props.sandbox === false) {
+            delete props.sandbox;
+        } else if (typeof props.sandbox === 'object') {
+            props.sandbox = mapSandboxToString(props.sandbox);
+        }
 
         return (
             <iframe
-                sandbox={sandbox}
                 {...props}
+                style={{
+                    borderWidth: 0,
+                    ...style
+                }}
             />
         );
     }
