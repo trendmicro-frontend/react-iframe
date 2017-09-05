@@ -1508,25 +1508,6 @@ exports.locals = {
 
 /***/ }),
 
-/***/ "../node_modules/css-loader/index.js?camelCase&modules&importLoaders=1&localIdentName=[local]---[hash:base64:5]!../node_modules/stylus-loader/index.js!../node_modules/stylint-loader/index.js!./Section.styl":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(undefined);
-// imports
-
-
-// module
-exports.push([module.i, ".section---1wA3k {\n  background: #fff;\n  border: 1px solid #d6d6d6;\n  position: relative;\n  z-index: 1;\n  -webkit-transition: height 0.3s ease;\n  -moz-transition: height 0.3s ease;\n  -o-transition: height 0.3s ease;\n  -ms-transition: height 0.3s ease;\n  transition: height 0.3s ease;\n}\n.section---1wA3k:last-child {\n  margin-bottom: 20px;\n}\n.section-content---21DU7 {\n  padding: 0 16px 16px;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n@media screen and (max-width: 1023px) {\n  .section-content---21DU7 {\n    position: static;\n    height: 100%;\n  }\n}\n", ""]);
-
-// exports
-exports.locals = {
-	"section": "section---1wA3k",
-	"section-content": "section-content---21DU7",
-	"sectionContent": "section-content---21DU7"
-};
-
-/***/ }),
-
 /***/ "../node_modules/css-loader/lib/css-base.js":
 /***/ (function(module, exports) {
 
@@ -2845,6 +2826,572 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "../node_modules/lodash/_Symbol.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__("../node_modules/lodash/_root.js");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/_baseGetTag.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("../node_modules/lodash/_Symbol.js"),
+    getRawTag = __webpack_require__("../node_modules/lodash/_getRawTag.js"),
+    objectToString = __webpack_require__("../node_modules/lodash/_objectToString.js");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/_freeGlobal.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("../node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "../node_modules/lodash/_getRawTag.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("../node_modules/lodash/_Symbol.js");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/_objectToString.js":
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/_root.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__("../node_modules/lodash/_freeGlobal.js");
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/debounce.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("../node_modules/lodash/isObject.js"),
+    now = __webpack_require__("../node_modules/lodash/now.js"),
+    toNumber = __webpack_require__("../node_modules/lodash/toNumber.js");
+
+/** Error message constants. */
+var FUNC_ERROR_TEXT = 'Expected a function';
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeMax = Math.max,
+    nativeMin = Math.min;
+
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */
+function debounce(func, wait, options) {
+  var lastArgs,
+      lastThis,
+      maxWait,
+      result,
+      timerId,
+      lastCallTime,
+      lastInvokeTime = 0,
+      leading = false,
+      maxing = false,
+      trailing = true;
+
+  if (typeof func != 'function') {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = 'maxWait' in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = 'trailing' in options ? !!options.trailing : trailing;
+  }
+
+  function invokeFunc(time) {
+    var args = lastArgs,
+        thisArg = lastThis;
+
+    lastArgs = lastThis = undefined;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+
+  function leadingEdge(time) {
+    // Reset any `maxWait` timer.
+    lastInvokeTime = time;
+    // Start the timer for the trailing edge.
+    timerId = setTimeout(timerExpired, wait);
+    // Invoke the leading edge.
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime,
+        result = wait - timeSinceLastCall;
+
+    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+  }
+
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime,
+        timeSinceLastInvoke = time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we're at the
+    // trailing edge, the system time has gone backwards and we're treating
+    // it as the trailing edge, or we've hit the `maxWait` limit.
+    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
+  }
+
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer.
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+
+  function trailingEdge(time) {
+    timerId = undefined;
+
+    // Only invoke if we have `lastArgs` which means `func` has been
+    // debounced at least once.
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !== undefined) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = undefined;
+  }
+
+  function flush() {
+    return timerId === undefined ? result : trailingEdge(now());
+  }
+
+  function debounced() {
+    var time = now(),
+        isInvoking = shouldInvoke(time);
+
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+
+    if (isInvoking) {
+      if (timerId === undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        // Handle invocations in a tight loop.
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === undefined) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+
+module.exports = debounce;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/isObject.js":
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return value != null && (type == 'object' || type == 'function');
+}
+
+module.exports = isObject;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/isObjectLike.js":
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/isSymbol.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__("../node_modules/lodash/_baseGetTag.js"),
+    isObjectLike = __webpack_require__("../node_modules/lodash/isObjectLike.js");
+
+/** `Object#toString` result references. */
+var symbolTag = '[object Symbol]';
+
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */
+function isSymbol(value) {
+  return typeof value == 'symbol' ||
+    (isObjectLike(value) && baseGetTag(value) == symbolTag);
+}
+
+module.exports = isSymbol;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/now.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__("../node_modules/lodash/_root.js");
+
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */
+var now = function() {
+  return root.Date.now();
+};
+
+module.exports = now;
+
+
+/***/ }),
+
+/***/ "../node_modules/lodash/toNumber.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("../node_modules/lodash/isObject.js"),
+    isSymbol = __webpack_require__("../node_modules/lodash/isSymbol.js");
+
+/** Used as references for various `Number` constants. */
+var NAN = 0 / 0;
+
+/** Used to match leading and trailing whitespace. */
+var reTrim = /^\s+|\s+$/g;
+
+/** Used to detect bad signed hexadecimal string values. */
+var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+
+/** Used to detect binary string values. */
+var reIsBinary = /^0b[01]+$/i;
+
+/** Used to detect octal string values. */
+var reIsOctal = /^0o[0-7]+$/i;
+
+/** Built-in method references without a dependency on `root`. */
+var freeParseInt = parseInt;
+
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */
+function toNumber(value) {
+  if (typeof value == 'number') {
+    return value;
+  }
+  if (isSymbol(value)) {
+    return NAN;
+  }
+  if (isObject(value)) {
+    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+    value = isObject(other) ? (other + '') : other;
+  }
+  if (typeof value != 'string') {
+    return value === 0 ? value : +value;
+  }
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return (isBinary || reIsOctal.test(value))
+    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
+    : (reIsBadHex.test(value) ? NAN : +value);
+}
+
+module.exports = toNumber;
+
 
 /***/ }),
 
@@ -23806,6 +24353,34 @@ module.exports = __webpack_require__.p + "37f4597594857b017901209aae0a60e1.svg";
 
 /***/ }),
 
+/***/ "../node_modules/webpack/buildin/global.js":
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
 /***/ "../src/Iframe.jsx":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23815,6 +24390,8 @@ module.exports = __webpack_require__.p + "37f4597594857b017901209aae0a60e1.svg";
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -23836,6 +24413,8 @@ var _reactDom = __webpack_require__("../node_modules/react-dom/index.js");
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -23869,13 +24448,21 @@ var Iframe = (_temp = _class = function (_PureComponent) {
     _createClass(Iframe, [{
         key: 'render',
         value: function render() {
-            var props = _extends({}, this.props);
-            var sandbox = mapSandboxToString(props.sandbox);
-            delete props.sandbox;
+            var _props = this.props,
+                style = _props.style,
+                props = _objectWithoutProperties(_props, ['style']);
 
-            return _react2.default.createElement('iframe', _extends({
-                sandbox: sandbox
-            }, props));
+            if (props.sandbox === false) {
+                delete props.sandbox;
+            } else if (_typeof(props.sandbox) === 'object') {
+                props.sandbox = mapSandboxToString(props.sandbox);
+            }
+
+            return _react2.default.createElement('iframe', _extends({}, props, {
+                style: _extends({
+                    borderWidth: 0
+                }, style)
+            }));
         }
     }, {
         key: 'iframe',
@@ -23897,7 +24484,7 @@ var Iframe = (_temp = _class = function (_PureComponent) {
 
     return Iframe;
 }(_react.PureComponent), _class.propTypes = {
-    sandbox: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.shape({
+    sandbox: _propTypes2.default.oneOfType([_propTypes2.default.bool, _propTypes2.default.string, _propTypes2.default.shape({
         // Re-enables form submission
         allowForms: _propTypes2.default.bool,
 
@@ -23920,7 +24507,6 @@ var Iframe = (_temp = _class = function (_PureComponent) {
         allowTopNavigation: _propTypes2.default.bool
     })])
 }, _class.defaultProps = {
-    frameBorder: 0,
     width: '100%',
     height: '100%',
     sandbox: {
@@ -24121,82 +24707,23 @@ if(false) {
 
 /***/ }),
 
-/***/ "./Section.jsx":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _classnames = __webpack_require__("../node_modules/classnames/index.js");
-
-var _classnames2 = _interopRequireDefault(_classnames);
-
-var _react = __webpack_require__("../node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Section = __webpack_require__("./Section.styl");
-
-var _Section2 = _interopRequireDefault(_Section);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (props) {
-    return _react2.default.createElement(
-        'div',
-        { className: (0, _classnames2.default)(props.className, _Section2.default.section) },
-        _react2.default.createElement(
-            'div',
-            { className: _Section2.default.sectionContent },
-            props.children
-        )
-    );
-};
-
-/***/ }),
-
-/***/ "./Section.styl":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("../node_modules/css-loader/index.js?camelCase&modules&importLoaders=1&localIdentName=[local]---[hash:base64:5]!../node_modules/stylus-loader/index.js!../node_modules/stylint-loader/index.js!./Section.styl");
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__("../node_modules/style-loader/addStyles.js")(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js?camelCase&modules&importLoaders=1&localIdentName=[local]---[hash:base64:5]!../node_modules/stylus-loader/index.js!../node_modules/stylint-loader/index.js!./Section.styl", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js?camelCase&modules&importLoaders=1&localIdentName=[local]---[hash:base64:5]!../node_modules/stylus-loader/index.js!../node_modules/stylint-loader/index.js!./Section.styl");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ "./index.jsx":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 __webpack_require__("../node_modules/trendmicro-ui/dist/css/trendmicro-ui.css");
 
 __webpack_require__("../node_modules/@trendmicro/react-buttons/dist/react-buttons.css");
+
+var _debounce = __webpack_require__("../node_modules/lodash/debounce.js");
+
+var _debounce2 = _interopRequireDefault(_debounce);
 
 var _react = __webpack_require__("../node_modules/react/react.js");
 
@@ -24210,15 +24737,13 @@ var _Navbar = __webpack_require__("./Navbar.jsx");
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
-var _Section = __webpack_require__("./Section.jsx");
-
-var _Section2 = _interopRequireDefault(_Section);
-
 var _src = __webpack_require__("../src/index.js");
 
 var _src2 = _interopRequireDefault(_src);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24226,20 +24751,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import styles from './index.styl';
-
 var App = function (_PureComponent) {
     _inherits(App, _PureComponent);
 
     function App() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            fixed: {
+                width: 0,
+                height: 240
+            },
+            resizable: {
+                width: 0,
+                height: 0
+            }
+        }, _this.timer = null, _this.iframes = {
+            fixed: null,
+            resizable: null
+        }, _this.resizeIframes = (0, _debounce2.default)(function () {
+            Object.keys(_this.iframes).forEach(function (key) {
+                var iframe = _reactDom2.default.findDOMNode(_this.iframes[key]);
+                _this.setState(function (state) {
+                    return _defineProperty({}, key, _extends({}, state[key], {
+                        width: iframe.contentWindow.document.body.offsetWidth
+                    }));
+                });
+            });
+        }, 100), _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            window.addEventListener('resize', this.resizeIframes);
+
+            setTimeout(function () {
+                _this2.resizeIframes();
+            }, 0);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            window.removeEventListener('resize', this.resizeIframes);
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             var name = 'React Iframe';
             var url = 'https://github.com/trendmicro-frontend/react-iframe';
 
@@ -24255,19 +24825,84 @@ var App = function (_PureComponent) {
                         { className: 'row' },
                         _react2.default.createElement(
                             'div',
-                            { className: 'col-md-12' },
+                            { className: 'col-md-6 col-sm-12' },
                             _react2.default.createElement(
-                                _Section2.default,
-                                { className: 'row-md-6' },
-                                _react2.default.createElement(
-                                    'h2',
-                                    null,
-                                    'Title #1'
-                                ),
-                                _react2.default.createElement(_src2.default, {
-                                    src: 'https://github.com'
-                                })
-                            )
+                                'h3',
+                                null,
+                                'Iframe with fixed height'
+                            ),
+                            this.state.fixed.width > 0 && this.state.fixed.height > 0 && _react2.default.createElement(
+                                'p',
+                                null,
+                                'width: ',
+                                this.state.fixed.width,
+                                ', height: ',
+                                this.state.fixed.height
+                            ),
+                            _react2.default.createElement(_src2.default, {
+                                ref: function ref(node) {
+                                    _this3.iframes.fixed = node;
+                                },
+                                src: './iframe.html',
+                                style: {
+                                    width: '100%',
+                                    height: this.state.fixed.height,
+                                    marginBottom: 20
+                                }
+                            })
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'col-md-6 col-sm-12' },
+                            _react2.default.createElement(
+                                'h3',
+                                null,
+                                'Resize iframe to fit content (same domain only)'
+                            ),
+                            this.state.resizable.width > 0 && this.state.resizable.height > 0 && _react2.default.createElement(
+                                'p',
+                                null,
+                                'width: ',
+                                this.state.resizable.width,
+                                ', height: ',
+                                this.state.resizable.height
+                            ),
+                            _react2.default.createElement(_src2.default, {
+                                ref: function ref(node) {
+                                    if (_this3.timer) {
+                                        clearInterval(_this3.timer);
+                                        _this3.timer = null;
+                                    }
+
+                                    _this3.iframes.resizable = node;
+
+                                    if (!node) {
+                                        return;
+                                    }
+
+                                    var iframe = _reactDom2.default.findDOMNode(node);
+                                    if (iframe && iframe.contentWindow) {
+                                        _this3.timer = setInterval(function () {
+                                            var nextHeight = iframe.contentWindow.document.body.offsetHeight;
+                                            if (_this3.state.resizable.height !== nextHeight) {
+                                                iframe.style.height = nextHeight + 'px';
+                                                _this3.setState(function (state) {
+                                                    return {
+                                                        resizable: _extends({}, state.resizable, {
+                                                            height: nextHeight
+                                                        })
+                                                    };
+                                                });
+                                            }
+                                        }, 200);
+                                    }
+                                },
+                                src: './iframe.html',
+                                style: {
+                                    width: '100%',
+                                    marginBottom: 20
+                                }
+                            })
                         )
                     )
                 )
@@ -24283,4 +24918,4 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?24a0c4430dfa3f221e2e
+//# sourceMappingURL=bundle.js.map?072508fb4e8acad532d9
