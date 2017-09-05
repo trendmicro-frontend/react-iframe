@@ -36,7 +36,7 @@ Name | Type | Default | Description
 src | string | | The src attribute specifies the address of the document to embed in the iframe.
 width | string or number | '100%' | The width attribute specifies the width of an iframe, in pixels.
 height | string or number | '100%' | The height attribute specifies the height of an iframe, in pixels.
-sandbox | object or string |  | The sandbox attribute enables an extra set of restrictions for the content in the iframe.
+sandbox | boolean, object, or string |  | The sandbox attribute enables an extra set of restrictions for the content in the iframe.
 sandbox.allowForms | boolean | true | Re-enables form submission.
 sandbox.allowModals | boolean | true | Sandboxed frames will block modal dialogs by default.
 sandbox.allowPointerLock | boolean | false | Re-enables APIs.
