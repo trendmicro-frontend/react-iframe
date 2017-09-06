@@ -57,10 +57,6 @@ class Iframe extends PureComponent {
         }
     };
 
-    get iframe() {
-        const iframe = ReactDOM.findDOMNode(this);
-        return iframe;
-    }
     get contentWindow() {
         const iframe = ReactDOM.findDOMNode(this);
         const { contentWindow } = { ...iframe };
