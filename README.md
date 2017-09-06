@@ -78,12 +78,6 @@ sandbox.allowSameOrigin | boolean | true | Allows the iframe content to be treat
 sandbox.allowScripts | boolean | true | Re-enables scripts.
 sandbox.allowTopNavigation | boolean | false | Allows the iframe content to navigate its top-level browsing context.
 
-### Getters
-
-Name | Description
-:--- | :----------
-contentWindow | The Window object of an iframe element.
-
 ## License
 
 MIT

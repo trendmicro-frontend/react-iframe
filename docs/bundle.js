@@ -24408,10 +24408,6 @@ var _react = __webpack_require__("../node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__("../node_modules/react-dom/index.js");
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -24463,16 +24459,6 @@ var Iframe = (_temp = _class = function (_PureComponent) {
                     borderWidth: 0
                 }, style)
             }));
-        }
-    }, {
-        key: 'contentWindow',
-        get: function get() {
-            var iframe = _reactDom2.default.findDOMNode(this);
-
-            var _iframe = _extends({}, iframe),
-                contentWindow = _iframe.contentWindow;
-
-            return contentWindow;
         }
     }]);
 
@@ -24912,4 +24898,4 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?3d0ff96021fa6cf51610
+//# sourceMappingURL=bundle.js.map?01485b888180337f9b4a

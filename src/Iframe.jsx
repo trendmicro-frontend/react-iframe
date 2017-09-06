@@ -1,7 +1,6 @@
 /* eslint jsx-a11y/iframe-has-title: 0 */
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import ReactDOM from 'react-dom';
 
 const mapSandboxToString = (sandbox = '') => {
     if (typeof sandbox === 'string') {
@@ -57,11 +56,6 @@ class Iframe extends PureComponent {
         }
     };
 
-    get contentWindow() {
-        const iframe = ReactDOM.findDOMNode(this);
-        const { contentWindow } = { ...iframe };
-        return contentWindow;
-    }
     render() {
         const { style, ...props } = this.props;
 
