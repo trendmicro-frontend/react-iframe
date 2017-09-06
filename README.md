@@ -82,7 +82,6 @@ sandbox.allowTopNavigation | boolean | false | Allows the iframe content to navi
 
 Name | Description
 :--- | :----------
-iframe | The iframe element.
 contentWindow | The Window object of an iframe element.
 
 ## License
