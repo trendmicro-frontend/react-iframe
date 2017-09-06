@@ -24465,12 +24465,6 @@ var Iframe = (_temp = _class = function (_PureComponent) {
             }));
         }
     }, {
-        key: 'iframe',
-        get: function get() {
-            var iframe = _reactDom2.default.findDOMNode(this);
-            return iframe;
-        }
-    }, {
         key: 'contentWindow',
         get: function get() {
             var iframe = _reactDom2.default.findDOMNode(this);
@@ -24918,4 +24912,4 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?072508fb4e8acad532d9
+//# sourceMappingURL=bundle.js.map?3d0ff96021fa6cf51610
