@@ -11,38 +11,34 @@ class App extends PureComponent {
         fixed: {
             width: 0,
             height: 240
-        },
-        resizable: {
-            width: 0,
-            height: 0
         }
     };
     timer = null;
     iframes = {
-        fixed: null,
-        resizable: null
+        fixed: null
     };
-    resizeIframes = debounce(() => {
+    resizeIframeWidth = debounce(() => {
         Object.keys(this.iframes).forEach(key => {
             const iframe = ReactDOM.findDOMNode(this.iframes[key]);
+            const target = iframe.contentDocument.body;
             this.setState(state => ({
                 [key]: {
                     ...state[key],
-                    width: iframe.contentWindow.document.body.offsetWidth
+                    width: target ? target.offsetWidth : 0
                 }
             }));
         });
     }, 100);
 
     componentDidMount() {
-        window.addEventListener('resize', this.resizeIframes);
+        window.addEventListener('resize', this.resizeIframeWidth);
 
         setTimeout(() => {
-            this.resizeIframes();
+            this.resizeIframeWidth();
         }, 0);
     }
     componentWillUnmount() {
-        window.removeEventListener('resize', this.resizeIframes);
+        window.removeEventListener('resize', this.resizeIframeWidth);
     }
     render() {
         const name = 'React Iframe';
@@ -53,7 +49,7 @@ class App extends PureComponent {
                 <Navbar name={name} url={url} />
                 <div className="container-fluid" style={{ padding: '20px 20px 0' }}>
                     <div className="row">
-                        <div className="col-md-6 col-sm-12">
+                        <div className="col-sm-12">
                             <h3>Iframe with fixed height</h3>
                             {this.state.fixed.width > 0 && this.state.fixed.height > 0 &&
                             <p>width: {this.state.fixed.width}, height: {this.state.fixed.height}</p>
@@ -70,11 +66,46 @@ class App extends PureComponent {
                                 }}
                             />
                         </div>
-                        <div className="col-md-6 col-sm-12">
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-12">
                             <h3>Resize iframe to fit content (same domain only)</h3>
-                            {this.state.resizable.width > 0 && this.state.resizable.height > 0 &&
-                            <p>width: {this.state.resizable.width}, height: {this.state.resizable.height}</p>
-                            }
+                        </div>
+                        <div className="col-sm-6">
+                            <h5>MutationObserver</h5>
+                            <Iframe
+                                ref={node => {
+                                    if (!node) {
+                                        return;
+                                    }
+
+                                    const iframe = ReactDOM.findDOMNode(node);
+                                    iframe.addEventListener('load', () => {
+                                        const target = iframe.contentDocument.body;
+                                        const nextHeight = target.scrollHeight;
+                                        iframe.style.height = `${nextHeight}px`;
+
+                                        const observer = new MutationObserver(mutations => {
+                                            const nextHeight = target.scrollHeight;
+                                            iframe.style.height = `${nextHeight}px`;
+                                        });
+                                        observer.observe(target, {
+                                            attributes: true,
+                                            childList: true,
+                                            characterData: true,
+                                            subtree: true
+                                        });
+                                    });
+                                }}
+                                src="./iframe.html"
+                                style={{
+                                    width: '100%',
+                                    marginBottom: 20
+                                }}
+                            />
+                        </div>
+                        <div className="col-sm-6">
+                            <h5>Polling every 200ms</h5>
                             <Iframe
                                 ref={node => {
                                     if (this.timer) {
@@ -82,27 +113,21 @@ class App extends PureComponent {
                                         this.timer = null;
                                     }
 
-                                    this.iframes.resizable = node;
-
                                     if (!node) {
                                         return;
                                     }
 
                                     const iframe = ReactDOM.findDOMNode(node);
-                                    if (iframe && iframe.contentWindow) {
+                                    iframe.addEventListener('load', () => {
+                                        const target = iframe.contentDocument.body;
+                                        const nextHeight = target.scrollHeight;
+                                        iframe.style.height = `${nextHeight}px`;
+
                                         this.timer = setInterval(() => {
-                                            const nextHeight = iframe.contentWindow.document.body.scrollHeight;
-                                            if (this.state.resizable.height !== nextHeight) {
-                                                iframe.style.height = nextHeight + 'px';
-                                                this.setState(state => ({
-                                                    resizable: {
-                                                        ...state.resizable,
-                                                        height: nextHeight
-                                                    }
-                                                }));
-                                            }
+                                            const nextHeight = target.scrollHeight;
+                                            iframe.style.height = `${nextHeight}px`;
                                         }, 200);
-                                    }
+                                    });
                                 }}
                                 src="./iframe.html"
                                 style={{
