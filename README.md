@@ -34,29 +34,38 @@ If you want to avoid polling, use [MutationObserver](https://developer.mozilla.o
 
 ```js
 <Iframe
-    ref={iframe => {
+    ref={node => {
         if (this.resizableIframeTimer) {
             clearInterval(this.resizableIframeTimer);
             this.resizableIframeTimer = null;
         }
         
-        if (!iframe) {
+        if (!node) {
+            this.iframe = null;
             return;
         }
         
+        this.iframe = ReactDOM.findDOMNode(node);
+
         if (iframe.contentWindow) {
-            let prevHeight = 0;
-            this.resizableIframeTimer = setInterval(() => {
-                const nextHeight = iframe.contentWindow.document.body.offsetHeight;
-                if (prevHeight !== nextHeight) {
-                    iframe.style.height = nextHeight + 'px';
-                    prevHeight = nextHeight;
-                }
-            }, 200);
+            this.resizableIframeTimer = (iframe => {
+                let prevHeight = 0;
+                this.iframe.style.height = `${prevHeight}px`;
+                return setInterval(() => {
+                    const nextHeight = iframe.contentWindow.document.body.scrollHeight || 0;
+                    if (nextHeight > 0 && prevHeight !== nextHeight) {
+                        iframe.style.height = `${nextHeight}px`;
+                        prevHeight = nextHeight;
+                    }
+                }, 200);
+            })(this.iframe);
         }
     }}
     src="index.html"
     width="100%"
+    style={{
+        verticalAlign: 'top'
+    }}
 />
 ```
 
