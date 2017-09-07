@@ -24863,7 +24863,7 @@ var App = function (_PureComponent) {
                                     var iframe = _reactDom2.default.findDOMNode(node);
                                     if (iframe && iframe.contentWindow) {
                                         _this3.timer = setInterval(function () {
-                                            var nextHeight = iframe.contentWindow.document.body.offsetHeight;
+                                            var nextHeight = iframe.contentWindow.document.body.scrollHeight;
                                             if (_this3.state.resizable.height !== nextHeight) {
                                                 iframe.style.height = nextHeight + 'px';
                                                 _this3.setState(function (state) {
@@ -24898,4 +24898,4 @@ _reactDom2.default.render(_react2.default.createElement(App, null), document.get
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?01485b888180337f9b4a
+//# sourceMappingURL=bundle.js.map?a456bf9fb912e9eb6af7
