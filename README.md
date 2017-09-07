@@ -49,10 +49,15 @@ If you want to avoid polling, use [MutationObserver](https://developer.mozilla.o
         const iframe = ReactDOM.findDOMNode(node);
         iframe.addEventListener('load', () => {
             const target = iframe.contentDocument.body;
+            
+            // Recalculate the height of the content
+            iframe.style.height = 0;
             const nextHeight = target.scrollHeight;
             iframe.style.height = `${nextHeight}px`;
 
             this.timer = setInterval(() => {
+                // Recalculate the height of the content
+                iframe.style.height = 0;
                 const nextHeight = target.scrollHeight;
                 iframe.style.height = `${nextHeight}px`;
             }, 200);
@@ -79,19 +84,27 @@ If you want to avoid polling, use [MutationObserver](https://developer.mozilla.o
         const iframe = ReactDOM.findDOMNode(node);
         iframe.addEventListener('load', () => {
             const target = iframe.contentDocument.body;
+            const config = {
+                attributes: true,
+                attributeOldValue: false,
+                characterData: true,
+                characterDataOldValue: false,
+                childList: true,
+                subtree: true
+            };
+
+            // Recalculate the height of the content
+            iframe.style.height = 0;
             const nextHeight = target.scrollHeight;
             iframe.style.height = `${nextHeight}px`;
 
             this.observer = new MutationObserver(mutations => {
+                // Recalculate the height of the content
+                iframe.style.height = 0;
                 const nextHeight = target.scrollHeight;
                 iframe.style.height = `${nextHeight}px`;
             });
-            this.observer.observe(target, {
-                attributes: true,
-                childList: true,
-                characterData: true,
-                subtree: true
-            });
+            this.observer.observe(target, config);
         });
     }}
     src="iframe.html"
