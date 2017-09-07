@@ -67,6 +67,11 @@ If you want to avoid polling, use [MutationObserver](https://developer.mozilla.o
 ```js
 <Iframe
     ref={node => {
+        if (this.observer) {
+            this.observer.disconnect();
+            this.observer = null;
+        }
+
         if (!node) {
             return;
         }
@@ -77,11 +82,11 @@ If you want to avoid polling, use [MutationObserver](https://developer.mozilla.o
             const nextHeight = target.scrollHeight;
             iframe.style.height = `${nextHeight}px`;
 
-            const observer = new MutationObserver(mutations => {
+            this.observer = new MutationObserver(mutations => {
                 const nextHeight = target.scrollHeight;
                 iframe.style.height = `${nextHeight}px`;
             });
-            observer.observe(target, {
+            this.observer.observe(target, {
                 attributes: true,
                 childList: true,
                 characterData: true,
