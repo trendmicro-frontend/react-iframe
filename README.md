@@ -52,7 +52,9 @@ If you want to avoid polling, use [MutationObserver](https://developer.mozilla.o
                 let prevHeight = 0;
                 this.iframe.style.height = `${prevHeight}px`;
                 return setInterval(() => {
-                    const nextHeight = iframe.contentWindow.document.body.scrollHeight || 0;
+                    const nextHeight = iframe.contentWindow.document.body
+                        ? iframe.contentWindow.document.body.scrollHeight
+                        : 0;
                     if (nextHeight > 0 && prevHeight !== nextHeight) {
                         iframe.style.height = `${nextHeight}px`;
                         prevHeight = nextHeight;
