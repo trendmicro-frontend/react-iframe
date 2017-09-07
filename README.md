@@ -32,42 +32,64 @@ Demo: https://trendmicro-frontend.github.io/react-iframe
 
 If you want to avoid polling, use [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) or [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) to detect the size of the iframe on content changes.
 
+#### Polling every 200ms
+
 ```js
 <Iframe
     ref={node => {
-        if (this.resizableIframeTimer) {
-            clearInterval(this.resizableIframeTimer);
-            this.resizableIframeTimer = null;
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
         }
-        
+
         if (!node) {
-            this.iframe = null;
             return;
         }
-        
-        this.iframe = ReactDOM.findDOMNode(node);
 
-        if (iframe.contentWindow) {
-            this.resizableIframeTimer = (iframe => {
-                let prevHeight = 0;
-                this.iframe.style.height = `${prevHeight}px`;
-                return setInterval(() => {
-                    const nextHeight = iframe.contentWindow.document.body
-                        ? iframe.contentWindow.document.body.scrollHeight
-                        : 0;
-                    if (nextHeight > 0 && prevHeight !== nextHeight) {
-                        iframe.style.height = `${nextHeight}px`;
-                        prevHeight = nextHeight;
-                    }
-                }, 200);
-            })(this.iframe);
+        const iframe = ReactDOM.findDOMNode(node);
+        iframe.addEventListener('load', () => {
+            const target = iframe.contentDocument.body;
+            const nextHeight = target.scrollHeight;
+            iframe.style.height = `${nextHeight}px`;
+
+            this.timer = setInterval(() => {
+                const nextHeight = target.scrollHeight;
+                iframe.style.height = `${nextHeight}px`;
+            }, 200);
+        });
+    }}
+    src="iframe.html"
+/>
+```
+
+#### MutationObserver
+
+```js
+<Iframe
+    ref={node => {
+        if (!node) {
+            return;
         }
+
+        const iframe = ReactDOM.findDOMNode(node);
+        iframe.addEventListener('load', () => {
+            const target = iframe.contentDocument.body;
+            const nextHeight = target.scrollHeight;
+            iframe.style.height = `${nextHeight}px`;
+
+            const observer = new MutationObserver(mutations => {
+                const nextHeight = target.scrollHeight;
+                iframe.style.height = `${nextHeight}px`;
+            });
+            observer.observe(target, {
+                attributes: true,
+                childList: true,
+                characterData: true,
+                subtree: true
+            });
+        });
     }}
-    src="index.html"
-    width="100%"
-    style={{
-        verticalAlign: 'top'
-    }}
+    src="iframe.html"
 />
 ```
 
