@@ -91,7 +91,7 @@ class App extends PureComponent {
                                     const iframe = ReactDOM.findDOMNode(node);
                                     if (iframe && iframe.contentWindow) {
                                         this.timer = setInterval(() => {
-                                            const nextHeight = iframe.contentWindow.document.body.offsetHeight;
+                                            const nextHeight = iframe.contentWindow.document.body.scrollHeight;
                                             if (this.state.resizable.height !== nextHeight) {
                                                 iframe.style.height = nextHeight + 'px';
                                                 this.setState(state => ({
