@@ -22,92 +22,35 @@ Demo: https://trendmicro-frontend.github.io/react-iframe
 
 ## Usage
 
-### Fixed width and height
+### Fixed Iframe Height
 
 ```js
 <Iframe src="index.html" width="100%" height={240} />
 ```
 
-### Resize iframe to fit content (same domain only)
+### Resize Iframe to Fit Content (Same Domain Only)
 
-If you want to avoid polling, use [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) or [iframe-resizer](https://github.com/davidjbradshaw/iframe-resizer) to detect the size of the iframe on content changes.
+```jsx
+import ResizeObserver from 'resize-observer-polyfill';
 
-#### Polling every 200ms
-
-```js
 <Iframe
-    ref={node => {
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
-
-        if (!node) {
+    src="iframe.html"
+    onLoad={({ event, iframe }) => {
+        if (!(iframe && iframe.contentDocument)) {
             return;
         }
 
-        const iframe = ReactDOM.findDOMNode(node);
-        iframe.addEventListener('load', () => {
+        const target = iframe.contentDocument.body;
+        const nextHeight = target.offsetHeight;
+        iframe.style.height = `${nextHeight}px`;
+
+        const observer = new ResizeObserver(entries => {
             const target = iframe.contentDocument.body;
-            
-            // Recalculate the height of the content
-            iframe.style.height = 0;
-            const nextHeight = target.scrollHeight;
+            const nextHeight = target.offsetHeight;
             iframe.style.height = `${nextHeight}px`;
-
-            this.timer = setInterval(() => {
-                // Recalculate the height of the content
-                iframe.style.height = 0;
-                const nextHeight = target.scrollHeight;
-                iframe.style.height = `${nextHeight}px`;
-            }, 200);
         });
+        observer.observe(target);
     }}
-    src="iframe.html"
-/>
-```
-
-#### MutationObserver
-
-```js
-<Iframe
-    ref={node => {
-        if (this.observer) {
-            this.observer.disconnect();
-            this.observer = null;
-        }
-
-        if (!node) {
-            return;
-        }
-
-        const iframe = ReactDOM.findDOMNode(node);
-        iframe.addEventListener('load', () => {
-            const target = iframe.contentDocument.body;
-            const config = {
-                attributes: true,
-                attributeOldValue: false,
-                characterData: true,
-                characterDataOldValue: false,
-                childList: true,
-                subtree: true
-            };
-
-            // Recalculate the height of the content
-            iframe.style.height = 0;
-            const nextHeight = target.scrollHeight;
-            iframe.style.height = `${nextHeight}px`;
-
-            this.observer = new MutationObserver(mutations => {
-                // Recalculate the height of the content
-                iframe.style.height = 0;
-                const nextHeight = target.scrollHeight;
-                iframe.style.height = `${nextHeight}px`;
-            });
-            this.observer.observe(target, config);
-        });
-    }}
-    src="iframe.html"
 />
 ```
 
@@ -128,6 +71,9 @@ sandbox.allowPopups | boolean | true | Re-enables popups.
 sandbox.allowSameOrigin | boolean | true | Allows the iframe content to be treated as being from the same origin.
 sandbox.allowScripts | boolean | true | Re-enables scripts.
 sandbox.allowTopNavigation | boolean | false | Allows the iframe content to navigate its top-level browsing context.
+onLoad | function | | Callback invoked when the iframe has been loaded: `({ event: Event, iframe: HTMLElement })`
+onBeforeUnload | function | | Callback invoked when the iframe is about to be unloaded: `({ event: Event, iframe: HTMLElement })`
+onUnload | function | | Callback invoked when the iframe has unloaded: `({ event: Event })`
 
 ## License
 
