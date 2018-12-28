@@ -84,13 +84,13 @@ const webpackConfig = {
 };
 
 module.exports = {
-    title: 'React Component',
+    title: 'React Iframe',
     serverPort: 8080,
     styleguideDir: 'docs/',
     webpackConfig: webpackConfig,
     components: ['src/**/*.jsx'],
     ribbon: {
-        url: 'https://github.com/trendmicro-frontend/react-component',
+        url: 'https://github.com/trendmicro-frontend/react-iframe',
         text: 'Fork me on GitHub'
     },
     require: [
